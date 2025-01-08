@@ -19,10 +19,10 @@ public class Sudoko {
 		};
 		
 
-		System.out.println(isExistInRow(board , 7 , 0));
-		System.out.println(isExistInColumn(board , 5 , 8));
-		System.out.print(isExistInSubGrid(board , 1 , 7 , 8));
-		
+//		System.out.println(isExistInRow(board , 7 , 0));
+//		System.out.println(isExistInColumn(board , 5 , 8));
+//		System.out.print(isExistInSubGrid(board , 1 , 7 , 8));
+		System.out.print(isItVAlid(board,1,8,0));
 	}
 	
 	//Function to check if x exist in a row
@@ -60,5 +60,11 @@ public class Sudoko {
 			}
 		}
 		return false;
+	}
+	
+	private static boolean isItVAlid (int[][] board,int number , int row , int column ) {
+		return !isExistInRow(board , number ,row ) && 
+				!isExistInColumn(board,number,column) && 
+				!isExistInSubGrid(board,number,row,column);
 	}
 }
