@@ -18,8 +18,11 @@ public class Sudoko {
 				{0,0,3,0,4,0,0,9,0}
 		};
 		
+
 		System.out.println(isExistInRow(board , 7 , 0));
-		System.out.print(isExistInColumn(board , 5 , 8));
+		System.out.println(isExistInColumn(board , 5 , 8));
+		System.out.print(isExistInSubGrid(board , 1 , 7 , 8));
+		
 	}
 	
 	//Function to check if x exist in a row
@@ -38,5 +41,24 @@ public class Sudoko {
 				return true;
 		}
 		return false;				
+	}
+	
+	
+	// We pass the cooridantes of the box that we want to verify if its local subgrid have the same number or not
+	// matalan bghit chouf lmorba3 li kayen ster 1 o colone 0 bghit ndir fih '5' khesni nchouf subgrid li kayntami liah dak lmorba3
+	// wach fiha '5' ola la  ?? 
+	//bach ntechecki kan cree wa7ed joj d les variables li kay7dedo liya les coordonnées dyal lmorba3 li f lfoo9 3la limn ga3 dyal subgrid
+	//khesni n3ref chmen ster o ach men column bach nel9ah khesni nched row li 3tit l function o n9es meno l ba9i dyal l9isma dyalo 3la '3'
+	// ye3ni row - (row % 3 ) o nefs lblan ndiro l column heka ghaykopun l code flexible o n9ed nchecki ay subgrid
+	private static boolean isExistInSubGrid (int[][] board , int number , int row , int column ) {
+		int topBoxRowIndex = row - (row % 3) ; 
+		int topBoxColumnIndex = column - (column % 3) ; 
+		for(int i = topBoxRowIndex ; i < topBoxRowIndex+3 ; i++) {
+			for(int j = topBoxColumnIndex ; j < topBoxColumnIndex+3 ; j++) {
+				if(board[i][j] == number)
+					return true;
+			}
+		}
+		return false;
 	}
 }
