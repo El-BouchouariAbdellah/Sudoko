@@ -5,6 +5,8 @@ public class Sudoko {
 	
 	public static void main(String[] args) {
 		
+		int [] poss_num = {1,2,3,4,5,6,7,8,9};
+		
 		//An easy example 
 		int [][] board = {
 				{0,0,8,0,0,0,9,0,5},
@@ -17,12 +19,28 @@ public class Sudoko {
 				{4,7,6,0,9,5,0,2,0},
 				{0,0,3,0,4,0,0,9,0}
 		};
+		for(int i = 0 ; i < GRID_SIZE ; i++) {
+			for(int j = 0; j < GRID_SIZE ; j++) {
+				if(board[i][j] == 0) {
+					for(int k = 0; k < GRID_SIZE ; k++) {
+						if(isItVAlid(board,poss_num[k],i,j) == true) {
+							board[i][j] = poss_num[k];
+						}
+					}
+					
+				}
+			}
+		}
 		
-
+		for(int c = 0 ; c < GRID_SIZE ; c++) {
+			for(int d = 0; d < GRID_SIZE ; d++) {
+				System.out.print(board[c][d]);
+			}
+		}
 //		System.out.println(isExistInRow(board , 7 , 0));
 //		System.out.println(isExistInColumn(board , 5 , 8));
 //		System.out.print(isExistInSubGrid(board , 1 , 7 , 8));
-		System.out.print(isItVAlid(board,1,8,0));
+		System.out.print(isItVAlid(board,8,1,2));
 	}
 	
 	//Function to check if x exist in a row
