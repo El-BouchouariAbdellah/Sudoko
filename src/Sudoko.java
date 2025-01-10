@@ -9,17 +9,17 @@ public class Sudoko {
 		
 		//An easy example 
 		int [][] board = {
-			{1,0,8,0,0,0,9,0,5},
-			{0,0,0,2,5,0,0,3,0},
-			{9,0,5,0,0,8,0,0,2},
-			{0,0,7,0,0,0,0,0,0},
-			{8,9,4,0,0,0,2,1,0},
-			{3,1,2,0,0,4,0,0,0},
-			{0,8,0,6,2,3,7,0,4},
-			{4,7,6,0,9,5,0,2,0},
-			{0,0,3,0,4,0,0,9,0}
+				{0,0,8,0,0,0,9,0,5},
+				{0,0,0,2,5,0,0,3,0},
+				{9,0,5,0,0,8,0,0,2},
+				{0,0,7,0,0,0,0,0,0},
+				{8,9,4,0,0,0,2,1,0},
+				{3,1,2,0,0,4,0,0,0},
+				{0,8,0,6,2,3,7,0,4},
+				{4,7,6,0,9,5,0,2,0},
+				{0,0,3,0,4,0,0,9,0}
 		};
-		System.out.print(isItVAlid(board,7,,1));
+		System.out.print(isItVAlid(board,1,0,1));
 //		for(int i = 0 ; i < GRID_SIZE ; i++) {
 //			for(int j = 0; j < GRID_SIZE ; j++) {
 //				if(board[i][j] == 0) {
@@ -85,4 +85,22 @@ public class Sudoko {
 				!isExistInColumn(board,number,column) && 
 				!isExistInSubGrid(board,number,row,column);
 	}
-}
+	
+	private static void solver (int [][] board) {
+		for(int i = 0 ; i < GRID_SIZE ; i++) {
+			for(int j = 0 ; j < GRID_SIZE ; j++) {
+				for (int k = 1 ; k < GRID_SIZE + 1 ; k++) {
+					if (board[i][j] != 0) {
+						j++;
+					}
+					else if (isItVAlid(board , k , i ,j) == true) {
+						board[i][j] = k;
+						j++;
+					}
+	
+					};
+				}
+			}
+		}
+	}
+
