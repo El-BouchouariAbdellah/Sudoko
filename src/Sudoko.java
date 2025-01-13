@@ -5,7 +5,6 @@ public class Sudoko {
 	
 	public static void main(String[] args) {
 		
-		int [] poss_num = {1,2,3,4,5,6,7,8,9};
 		
 		//An easy example 
 		int [][] board = {
@@ -19,30 +18,26 @@ public class Sudoko {
 				{4,7,6,0,9,5,0,2,0},
 				{0,0,3,0,4,0,0,9,0}
 		};
-		System.out.print(isItVAlid(board,1,0,1));
-//		for(int i = 0 ; i < GRID_SIZE ; i++) {
-//			for(int j = 0; j < GRID_SIZE ; j++) {
-//				if(board[i][j] == 0) {
-//					for(int k = 0; k < GRID_SIZE ; k++) {
-//						if(isItVAlid(board,poss_num[k],i,j) == true) {
-//							board[i][j] = poss_num[k];
-//						}
-//					}
-//					
-//				}
-//			}
-//		}
 		
-//		for(int c = 0 ; c < GRID_SIZE ; c++) {
-//			for(int d = 0; d < GRID_SIZE ; d++) {
-//				System.out.print(board[c][d]);
-//			}
-//		}
-//		System.out.println(isExistInRow(board , 7 , 0));
-//		System.out.println(isExistInColumn(board , 5 , 8));
-//		System.out.print(isExistInSubGrid(board , 1 , 7 , 8));
+		if (solver(board)) {
+			System.out.println("Sudoko Solved Successufly");
+			printSolver(board);
+		}
+		else {
+			System.out.print("The Sudoko puzzle is Wrong");
+		}
 	}
 	
+	
+	private static void printSolver(int[][] board) {
+		for(int i = 0 ; i < GRID_SIZE ; i++) {
+			for(int j =0 ; j < GRID_SIZE ; j++) {
+				System.out.print(board[i][j]);
+			}
+			System.out.println();
+		}		
+	}
+
 	//Function to check if x exist in a row
 	private static boolean isExistInRow (int[][] board , int number , int row) {
 		for(int i = 0 ; i < GRID_SIZE ; i++) {
@@ -86,21 +81,26 @@ public class Sudoko {
 				!isExistInSubGrid(board,number,row,column);
 	}
 	
-	private static void solver (int [][] board) {
+	private static boolean solver (int [][] board) {
 		for(int i = 0 ; i < GRID_SIZE ; i++) {
 			for(int j = 0 ; j < GRID_SIZE ; j++) {
-				for (int k = 1 ; k < GRID_SIZE + 1 ; k++) {
-					if (board[i][j] != 0) {
-						j++;
-					}
-					else if (isItVAlid(board , k , i ,j) == true) {
-						board[i][j] = k;
-						j++;
-					}
-	
-					};
+				if (board[i][j] == 0) {
+						for (int k = 1 ; k <= GRID_SIZE ; k++) {
+							if (isItVAlid(board,k,i,j)) {
+								board[i][j] = k ;
+								if(solver(board)) {
+									return true ;
+								}
+								else {
+									board[i][j]=0;
+								}
+							}
+						}
+				return false ;
+					}	
 				}
 			}
+		return true;
 		}
 	}
 
